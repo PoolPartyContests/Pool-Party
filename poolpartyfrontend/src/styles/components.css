@@ -1,0 +1,20 @@
+.navbar {
+  background-color: rgba(255, 255, 255, 0.867);
+
+  .navbar-brand {
+    color: #003249;
+    font-weight: 500;
+  }
+
+  .navbar-brand {
+    color: #003249;
+  }
+
+  .navbar-nav {
+    color: #003249;
+  }
+
+  .coming-soon-container {
+    color: red;
+  }
+}

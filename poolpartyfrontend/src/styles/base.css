@@ -1,0 +1,36 @@
+.base-page {
+  background-color: #003249;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(2vmin);
+  color: white;
+  text-align: center;
+  padding: 5%;
+  justify-content: space-evenly;
+
+  .welcome {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    color: #003249;
+    width: 80%;
+    padding: 1%;
+  }
+
+  .welcome-header {
+    padding: 1%;
+  }
+
+  .welcome-text-box {
+    background-color: white;
+    color: #343738;
+    font-size: medium;
+    border-radius: 10px;
+    padding: 1%;
+    max-width: 90%;
+  }
+}
