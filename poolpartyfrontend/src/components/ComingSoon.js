@@ -5,7 +5,7 @@ import "../styles/base.css";
 
 function ComingSoon() {
   const [email, setEmail] = useState("");
-  const [alert, setAlert] = useState({ message: "", result: "" });
+  const [alert, setAlert] = useState({});
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +28,13 @@ function ComingSoon() {
         </div>
         <div class="mt-8">
           {alert.message && (
-            <Alert severity={alert.result} style={{ margin: "20px" }}>
+            <Alert
+              severity={alert.result}
+              style={{ margin: "20px" }}
+              onClose={() => {
+                setAlert({});
+              }}
+            >
               {alert.message}
             </Alert>
           )}{" "}
