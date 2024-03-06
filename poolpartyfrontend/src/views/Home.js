@@ -4,17 +4,16 @@ import "../styles/base.css";
 import NavBar from "../components/NavBar";
 import ComingSoon from "../components/ComingSoon";
 
-function HomePage() {
+function Home() {
   return (
     <Fragment>
       <NavBar />
       <div className="base-page">
         <div className="welcome">
-          <h1 className="welcome-header">Welcome to Pool Party!</h1>
+          <h1 className="welcome-header">Welcome to PoolParty!</h1>
           <div className="welcome-text-box">
             We enable football fans to host their own survivor, daily, and
-            playoff competitions. We host public competitions that any user can
-            join.
+            playoff competitions.
           </div>
         </div>
         <ComingSoon />
@@ -23,4 +22,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Home;

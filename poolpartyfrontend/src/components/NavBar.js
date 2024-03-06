@@ -3,37 +3,45 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "../styles/components.css";
+import { LinkContainer } from "react-router-bootstrap";
+import "../styles/components.css";
 
 function HomeNavBar() {
   return (
     <Navbar expand="lg">
       <Container>
-        <Navbar.Brand href="#home">
-          <img
-            src="logo.png"
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-            alt="pool party logo"
-          />
-          Pool Party
-        </Navbar.Brand>
+        <LinkContainer to="/">
+          <Navbar.Brand>
+            <img
+              src="logo.png"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+              alt="pool party logo"
+            />
+            PoolParty
+          </Navbar.Brand>
+        </LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <LinkContainer to="/">
+              <Nav.Link>Home</Nav.Link>
+            </LinkContainer>
             <NavDropdown title="Competitions" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">
-                Playoff Challenge
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Survivor Pools
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">
-                Seasonal Daily
-              </NavDropdown.Item>
+              <LinkContainer to="/playoff-challenge">
+                <NavDropdown.Item>Playoff Challenge</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/survivor-pools">
+                <NavDropdown.Item>Survivor Pools</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/seasonal-daily">
+                <NavDropdown.Item>Seasonal Daily</NavDropdown.Item>
+              </LinkContainer>
             </NavDropdown>
-            <Nav.Link href="#link">About Us</Nav.Link>
+            <LinkContainer to="/about-us">
+              <Nav.Link>About Us</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Container>
