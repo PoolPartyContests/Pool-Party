@@ -29,18 +29,21 @@ function HomeNavBar() {
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
             <NavDropdown title="Competitions" id="basic-nav-dropdown">
-              <LinkContainer to="/playoff-challenge">
-                <NavDropdown.Item>Playoff Challenge</NavDropdown.Item>
-              </LinkContainer>
               <LinkContainer to="/survivor-pools">
                 <NavDropdown.Item>Survivor Pools</NavDropdown.Item>
               </LinkContainer>
               <LinkContainer to="/seasonal-daily">
                 <NavDropdown.Item>Seasonal Daily</NavDropdown.Item>
+              </LinkContainer>{" "}
+              <LinkContainer to="/playoff-challenge">
+                <NavDropdown.Item>Playoff Challenge</NavDropdown.Item>
               </LinkContainer>
             </NavDropdown>
             <LinkContainer to="/about-us">
               <Nav.Link>About Us</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/signup">
+              <Nav.Link>Sign Up</Nav.Link>
             </LinkContainer>
           </Nav>
         </Navbar.Collapse>

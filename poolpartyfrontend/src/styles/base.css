@@ -8,7 +8,7 @@
   color: white;
   text-align: center;
   padding: 5%;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
 
   .welcome {
     align-items: center;
@@ -19,6 +19,7 @@
     color: #003249;
     width: 80%;
     padding: 1%;
+    margin: 2rem;
   }
 
   .welcome-header {

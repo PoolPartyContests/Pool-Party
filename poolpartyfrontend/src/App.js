@@ -4,12 +4,14 @@ import SurvivorHome from "./views/SurvivorHome";
 import PlayoffChallengeHome from "./views/PlayoffChallengeHome";
 import SeasonalDailyHome from "./views/SeasonalDailyHome";
 import AboutUs from "./views/AboutUs";
+import SignUpPage from "./views/SignUpPage";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<SignUpPage />} />
         <Route path="/survivor-pools" element={<SurvivorHome />} />
         <Route path="/playoff-challenge" element={<PlayoffChallengeHome />} />
         <Route path="/seasonal-daily" element={<SeasonalDailyHome />} />
