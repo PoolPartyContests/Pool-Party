@@ -42,8 +42,8 @@ function HomeNavBar() {
             <LinkContainer to="/about-us">
               <Nav.Link>About Us</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/signup">
-              <Nav.Link>Sign Up</Nav.Link>
+            <LinkContainer to="/login">
+              <Nav.Link>Log In</Nav.Link>
             </LinkContainer>
           </Nav>
         </Navbar.Collapse>
