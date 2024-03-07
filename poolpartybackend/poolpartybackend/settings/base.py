@@ -47,8 +47,6 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_WHITELIST = []
-
 ROOT_URLCONF = "poolpartybackend.urls"
 
 TEMPLATES = [

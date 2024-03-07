@@ -1,6 +1,15 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
+const csrftoken = Cookies.get("csrftoken");
 
-export default axios;
+const axiosInstance = axios.create({
+  xsrfCookieName: "csrftoken",
+  xsrfHeaderName: "X-CSRFToken",
+  withCredentials: true,
+  headers: {
+    "X-CSRFToken": csrftoken,
+  },
+});
+
+export default axiosInstance;

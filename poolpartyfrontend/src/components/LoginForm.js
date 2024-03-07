@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "../axiosConfig";
+import axiosInstance from "../axiosConfig";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -14,7 +14,7 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         "http://localhost:8000/api/v1/login",
         formData,
         { withCredentials: true } // This is important for session authentication

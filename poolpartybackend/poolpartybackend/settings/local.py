@@ -6,9 +6,8 @@ from decouple import config
 DEBUG = True
 
 SECRET_KEY = config('SECRET_KEY')
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000"
-]
+CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
 
 DATABASES =  { 
     "default": 

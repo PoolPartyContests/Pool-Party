@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "../axiosConfig";
+import axiosInstance from "../axiosConfig";
 
 function SignUpForm() {
   const [formData, setFormData] = useState({
@@ -16,7 +16,7 @@ function SignUpForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         "http://localhost:8000/api/v1/signup",
         formData
       );
