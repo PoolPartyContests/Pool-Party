@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import axiosInstance from "../axiosConfig";
+import axiosInstance from "../../axiosConfig";
 
-function SignUpForm() {
+function LoginForm() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    email: "",
-    // Add any other fields you need
   });
 
   const handleChange = (e) => {
@@ -17,11 +15,12 @@ function SignUpForm() {
     e.preventDefault();
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8000/api/v1/signup",
-        formData
+        "http://localhost:8000/api/v1/login",
+        formData,
+        { withCredentials: true } // This is important for session authentication
       );
       console.log(response.data);
-      // Handle successful signup (e.g. redirect to login page)
+      // Handle successful login (e.g. redirect to home page)
     } catch (error) {
       console.error(error);
       // Handle error (e.g. display error message)
@@ -49,22 +48,12 @@ function SignUpForm() {
           required
           className="signup-input"
         />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email"
-          required
-          className="signup-input"
-        />
-        {/* Add any other fields you need */}
         <button type="submit" className="signup-button">
-          Sign Up
+          Log In
         </button>
       </form>
     </>
   );
 }
 
-export default SignUpForm;
+export default LoginForm;

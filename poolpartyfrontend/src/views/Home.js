@@ -1,8 +1,8 @@
 // React component in App.js
 import React, { Fragment } from "react";
 import "../styles/base.css";
-import NavBar from "../components/NavBar";
-import ComingSoon from "../components/ComingSoon";
+import NavBar from "../components/NavBar/NavBar";
+import ComingSoon from "../components/ComingSoon/ComingSoon";
 
 function Home() {
   return (

@@ -2,19 +2,17 @@
 import React, { Fragment } from "react";
 import "../styles/base.css";
 import NavBar from "../components/NavBar/NavBar";
+import SignUpForm from "../components/SignUpForm/SignUpForm";
 
-function SeasonalDailyHome() {
+function AboutUs() {
   return (
     <Fragment>
       <NavBar />
       <div className="base-page">
-        <h1 className="welcome-header">Welcome to Seasonal Daily!</h1>
-        <div className="welcome-text-box">
-          Here we host seasonal daily competitions.
-        </div>
+        <SignUpForm />
       </div>
     </Fragment>
   );
 }
 
-export default SeasonalDailyHome;
+export default AboutUs;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import jsonp from "jsonp";
 import Alert from "@mui/material/Alert";
-import "../styles/base.css";
+import "./ComingSoon.css";
 
 function ComingSoon() {
   const [email, setEmail] = useState("");

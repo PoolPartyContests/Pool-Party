@@ -1,8 +1,8 @@
 // React component in App.js
 import React, { Fragment } from "react";
 import "../styles/base.css";
-import NavBar from "../components/NavBar";
-import LoginForm from "../components/LoginForm";
+import NavBar from "../components/NavBar/NavBar";
+import LoginForm from "../components/LoginForm/LoginForm";
 import { LinkContainer } from "react-router-bootstrap";
 
 function Login() {
