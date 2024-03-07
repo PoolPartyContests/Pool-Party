@@ -42,6 +42,8 @@ function HomeNavBar() {
             <LinkContainer to="/about-us">
               <Nav.Link>About Us</Nav.Link>
             </LinkContainer>
+          </Nav>
+          <Nav className="ml-auto">
             <LinkContainer to="/login">
               <Nav.Link>Log In</Nav.Link>
             </LinkContainer>
