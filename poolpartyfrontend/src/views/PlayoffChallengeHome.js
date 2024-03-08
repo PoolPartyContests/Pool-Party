@@ -1,7 +1,7 @@
 // React component in App.js
 import React, { Fragment } from "react";
 import "../styles/base.css";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/NavBar/NavBar";
 
 function PlayoffChallengeHome() {
   return (

@@ -46,8 +46,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ORIGIN_WHITELIST = []
-
+CORS_ALLOW_CREDENTIALS = True
 ROOT_URLCONF = "poolpartybackend.urls"
 
 TEMPLATES = [
@@ -65,6 +64,12 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 WSGI_APPLICATION = "poolpartybackend.wsgi.application"
 

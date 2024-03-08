@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import jsonp from "jsonp";
 import Alert from "@mui/material/Alert";
-import "../styles/base.css";
+import "./ComingSoon.css";
 
 function ComingSoon() {
   const [email, setEmail] = useState("");
@@ -12,7 +12,6 @@ function ComingSoon() {
     const url =
       "https://gmail.us18.list-manage.com/subscribe/post-json?u=f626187bf48b35740a55f6f1f&amp;id=fe358a9230&amp;f_id=00dccbe0f0";
     jsonp(`${url}&EMAIL=${email}`, { param: "c" }, (_, data) => {
-      console.log(data);
       const { msg, result } = data;
       setAlert({ message: msg, result: result });
     });
@@ -24,9 +23,9 @@ function ComingSoon() {
       <div>
         <div>
           <h1>Coming Soon</h1>
-          <p class="mt-4 text-lg">We're working on something awesome!</p>
+          <p className="mt-4 text-lg">We're working on something awesome!</p>
         </div>
-        <div class="mt-8">
+        <div className="mt-8">
           {alert.message && (
             <Alert
               severity={alert.result}
@@ -38,12 +37,12 @@ function ComingSoon() {
               {alert.message}
             </Alert>
           )}{" "}
-          <form action="#" method="post" class="flex items-center">
+          <form action="#" method="post" className="flex items-center">
             <input
               type="email"
               name="email"
               placeholder="Enter your email"
-              class="subscribe-input"
+              className="subscribe-input"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               required
@@ -56,7 +55,7 @@ function ComingSoon() {
               Subscribe
             </button>{" "}
           </form>
-          <p class="mt-2 text-gray-400 text-sm">
+          <p className="mt-2 text-gray-400 text-sm">
             Be the first to know when we launch!
           </p>
         </div>

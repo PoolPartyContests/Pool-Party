@@ -2,11 +2,28 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import "../styles/components.css";
+import "./NavBar.css";
 import { LinkContainer } from "react-router-bootstrap";
-import "../styles/components.css";
+import axiosInstance from "../../axiosConfig";
+import { useNavigate } from "react-router-dom";
 
-function HomeNavBar() {
+function NavBar() {
+  const username = sessionStorage.getItem("username");
+  const navigate = useNavigate();
+
+  const logoutHandler = async () => {
+    try {
+      const response = await axiosInstance.post(
+        "http://localhost:8000/api/logout",
+        { withCredentials: true } // This is important for session authentication
+      );
+      sessionStorage.removeItem("username");
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Navbar expand="lg">
       <Container>
@@ -22,7 +39,6 @@ function HomeNavBar() {
             PoolParty
           </Navbar.Brand>
         </LinkContainer>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <LinkContainer to="/">
@@ -41,10 +57,21 @@ function HomeNavBar() {
             </NavDropdown>
             <LinkContainer to="/about-us">
               <Nav.Link>About Us</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/signup">
-              <Nav.Link>Sign Up</Nav.Link>
-            </LinkContainer>
+            </LinkContainer>{" "}
+          </Nav>
+          <Nav className="custom-margin">
+            {username ? (
+              <NavDropdown title={username}>
+                <NavDropdown.Item>View Profile</NavDropdown.Item>
+                <NavDropdown.Item onClick={logoutHandler}>
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : (
+              <LinkContainer to="/login">
+                <Nav.Link>Log In</Nav.Link>
+              </LinkContainer>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -52,4 +79,4 @@ function HomeNavBar() {
   );
 }
 
-export default HomeNavBar;
+export default NavBar;

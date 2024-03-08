@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../axiosConfig";
+import "./SignUpForm.css";
+import { useNavigate } from "react-router-dom";
 
 function SignUpForm() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -16,12 +20,11 @@ function SignUpForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/signup/",
+      const response = await axiosInstance.post(
+        "http://localhost:8000/api/signup",
         formData
       );
-      console.log(response.data);
-      // Handle successful signup (e.g. redirect to login page)
+      navigate("/");
     } catch (error) {
       console.error(error);
       // Handle error (e.g. display error message)
@@ -30,7 +33,6 @@ function SignUpForm() {
 
   return (
     <>
-      <h1>Sign up to create or join any of our competitions!</h1>
       <form onSubmit={handleSubmit} className="signup-form">
         <input
           type="text"
@@ -59,7 +61,6 @@ function SignUpForm() {
           required
           className="signup-input"
         />
-        {/* Add any other fields you need */}
         <button type="submit" className="signup-button">
           Sign Up
         </button>
