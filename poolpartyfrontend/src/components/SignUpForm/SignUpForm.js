@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import axiosInstance from "../../axiosConfig";
 import "./SignUpForm.css";
+import { useNavigate } from "react-router-dom";
 
 function SignUpForm() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -18,11 +21,10 @@ function SignUpForm() {
     e.preventDefault();
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8000/api/v1/signup",
+        "http://localhost:8000/api/signup",
         formData
       );
-      console.log(response.data);
-      // Handle successful signup (e.g. redirect to login page)
+      navigate("/");
     } catch (error) {
       console.error(error);
       // Handle error (e.g. display error message)
@@ -59,7 +61,6 @@ function SignUpForm() {
           required
           className="signup-input"
         />
-        {/* Add any other fields you need */}
         <button type="submit" className="signup-button">
           Sign Up
         </button>

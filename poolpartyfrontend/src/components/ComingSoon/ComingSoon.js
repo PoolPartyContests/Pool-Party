@@ -12,7 +12,6 @@ function ComingSoon() {
     const url =
       "https://gmail.us18.list-manage.com/subscribe/post-json?u=f626187bf48b35740a55f6f1f&amp;id=fe358a9230&amp;f_id=00dccbe0f0";
     jsonp(`${url}&EMAIL=${email}`, { param: "c" }, (_, data) => {
-      console.log(data);
       const { msg, result } = data;
       setAlert({ message: msg, result: result });
     });

@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from .serializers import UserSerializer
 
 class SignupView(APIView):
     def post(self, request):
@@ -29,6 +30,15 @@ class LoginView(APIView):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return Response({"detail": "Login Successful"}, status=status.HTTP_200_OK)
+            return Response({
+                "detail": "Login Successful",
+                "data": UserSerializer(user).data
+            }, status=status.HTTP_200_OK)
         else:
             return Response({"detail": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class LogoutView(APIView):
+    def post(self, request):
+        logout(request)
+        return Response({"detail": "Logout Successful"}, status=status.HTTP_200_OK)

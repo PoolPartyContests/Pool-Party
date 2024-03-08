@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axiosInstance from "../../axiosConfig";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -15,11 +18,12 @@ function LoginForm() {
     e.preventDefault();
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8000/api/v1/login",
+        "http://localhost:8000/api/login",
         formData,
         { withCredentials: true } // This is important for session authentication
       );
-      console.log(response.data);
+      sessionStorage.setItem("username", response.data.data.username);
+      navigate("/");
       // Handle successful login (e.g. redirect to home page)
     } catch (error) {
       console.error(error);
