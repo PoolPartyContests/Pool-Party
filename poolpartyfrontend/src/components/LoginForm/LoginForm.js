@@ -18,7 +18,7 @@ function LoginForm() {
     e.preventDefault();
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8000/api/login",
+        `${process.env.REACT_APP_API_URL}/api/login`,
         formData,
         { withCredentials: true } // This is important for session authentication
       );

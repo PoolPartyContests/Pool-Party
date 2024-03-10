@@ -21,7 +21,7 @@ function SignUpForm() {
     e.preventDefault();
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8000/api/signup",
+        `${process.env.REACT_APP_API_URL}/api/signup`,
         formData
       );
       navigate("/");
