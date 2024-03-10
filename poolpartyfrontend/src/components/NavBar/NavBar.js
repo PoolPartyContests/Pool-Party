@@ -14,7 +14,7 @@ function NavBar() {
   const logoutHandler = async () => {
     try {
       const response = await axiosInstance.post(
-        "http://localhost:8000/api/logout",
+        `${process.env.REACT_APP_API_URL}/api/logout`,
         { withCredentials: true } // This is important for session authentication
       );
       sessionStorage.removeItem("username");
