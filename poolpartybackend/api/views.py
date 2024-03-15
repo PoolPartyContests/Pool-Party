@@ -42,3 +42,8 @@ class LogoutView(APIView):
     def post(self, request):
         logout(request)
         return Response({"detail": "Logout Successful"}, status=status.HTTP_200_OK)
+
+
+class TestView(APIView):
+    def get(self, request):
+        return Response({"detail": "Test Successful"}, status=status.HTTP_200_OK)
