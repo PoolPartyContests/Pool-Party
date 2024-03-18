@@ -21,7 +21,7 @@ function SignUpForm() {
     e.preventDefault();
     try {
       const response = await axiosInstance.post(
-        `${process.env.REACT_APP_API_URL}/api/signup`,
+        `${process.env.BACKEND_API_URL}/api/signup`,
         formData
       );
       navigate("/");
