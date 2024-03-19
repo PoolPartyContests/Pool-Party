@@ -31,20 +31,22 @@ def get_ec2_instance_ip():
 # Configure SSL
 # https://blogs.ainomic.in/securing-your-django-website-on-aws-elastic-beanstalk-a-step-by-step-guide-to-https-implementation-6a8f02f16725
 
-
 AWS_LOCAL_IP = get_ec2_instance_ip()
 ALLOWED_HOSTS = [AWS_LOCAL_IP, 'PoolPartyBackend-env.us-east-2.elasticbeanstalk.com', 'api.poolpartycontests.com']
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 CORS_ORIGIN_WHITELIST = [
-    'https://main.d3lcczce7y35ro.amplifyapp.com',
+    'https://www.poolpartycontests.com',
+    'https://www.api.poolpartycontests.com',
     'https://api.poolpartycontests.com',
-    'https://poolpartycontests.com'
+    'https://poolpartycontests.com',
 ]
 CSRF_TRUSTED_ORIGINS = [
     'https://main.d3lcczce7y35ro.amplifyapp.com',
+    'https://www.poolpartycontests.com',
+    'https://www.api.poolpartycontests.com',
     'https://api.poolpartycontests.com',
-    'https://poolpartycontests.com'
+    'https://poolpartycontests.com',
 ]
 if 'RDS_HOSTNAME' in os.environ:
     DATABASES = {

@@ -20,10 +20,7 @@ function SignUpForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/signup`,
-        formData
-      );
+      const response = await axiosInstance.post("/api/signup", formData);
       navigate("/");
     } catch (error) {
       console.error(error);
