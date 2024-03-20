@@ -1,4 +1,4 @@
-# set DJANGO_SETTINGS_MODULE=poolpartybackend.settings.prod
+# set DJANGO_SETTINGS_MODULE=poolpartybackend.settings.local
 # export $(sudo cat /opt/elasticbeanstalk/deployment/env | xargs)
 import os
 from .base import *
@@ -59,3 +59,8 @@ if 'RDS_HOSTNAME' in os.environ:
             'PORT': os.environ['RDS_PORT'],
         }
     }
+
+SESSION_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True

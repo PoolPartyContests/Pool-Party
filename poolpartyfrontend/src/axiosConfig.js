@@ -1,7 +1,15 @@
 import axios from "axios";
 
 function getCsrfToken() {
-  return document.cookie.split("csrftoken=")[1].split(";")[0];
+  const cookies = document.cookie.split(";");
+  console.log(`Cookies string: ${cookies}`);
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].trim();
+    if (cookie.startsWith("csrftoken=")) {
+      return cookie.split("=")[1];
+    }
+  }
+  return null;
 }
 
 const axiosInstance = axios.create({
