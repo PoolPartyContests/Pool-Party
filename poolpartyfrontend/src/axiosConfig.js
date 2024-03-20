@@ -1,17 +1,10 @@
 import axios from "axios";
-
+import Cookies from "js-cookie";
 function getCsrfToken() {
-  const cookies = document.cookie.split(";");
-  console.log(`Cookies string: ${cookies}`);
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i].trim();
-    if (cookie.startsWith("csrftoken=")) {
-      return cookie.split("=")[1];
-    }
-  }
-  return null;
+  const csrftoken = Cookies.get("csrftoken");
+  console.log(csrftoken);
+  return csrftoken || "";
 }
-
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
   headers: {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../axiosConfig";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -13,7 +14,11 @@ function LoginForm() {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    axiosInstance.get("/api/get-csrf");
+    try {
+      axiosInstance.get("/api/get-csrf");
+    } catch (error) {
+      console.log(error.response.data.detail);
+    }
   }, []);
 
   const handleChange = (e) => {
@@ -23,13 +28,10 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.post(
-        "/api/login",
-        formData,
-        { withCredentials: true } // This is important for session authentication
-      );
+      const response = await axiosInstance.post("/api/login", formData, {
+        withCredentials: true,
+      });
       setErrorMessage("");
-      sessionStorage.setItem("username", response.data.data.username);
       navigate("/");
       // Handle successful login (e.g. redirect to home page)
     } catch (error) {
