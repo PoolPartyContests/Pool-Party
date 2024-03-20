@@ -11,14 +11,48 @@ function LoginForm() {
     password: "",
   });
 
+  const [sessionState, setSessionState] = useState({
+    csrf: "",
+    username: "",
+    password: "",
+    error: "",
+    isAuthenticated: false,
+  });
+
   const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {
+  const getCsrfToken = async function () {
     try {
-      axiosInstance.get("/api/get-csrf");
+      const response = await axiosInstance.get("/api/get-csrf");
+      const csrfToken = response.headers.get("X-CSRFToken");
+      console.log("token:");
+      console.log(csrfToken);
+      return csrfToken;
     } catch (error) {
-      console.log(error.response.data.detail);
+      console.log(error);
     }
+    return "";
+  };
+
+  useEffect(() => {
+    async function fetchSession() {
+      try {
+        const response = await axiosInstance.get("/api/get-session");
+        const data = response.data;
+        if (data.isAuthenticated) {
+          setSessionState({ ...sessionState, isAuthenticated: true });
+        } else {
+          setSessionState({
+            ...sessionState,
+            isAuthenticated: false,
+            csrf: getCsrfToken(),
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchSession();
   }, []);
 
   const handleChange = (e) => {
@@ -32,6 +66,7 @@ function LoginForm() {
         withCredentials: true,
       });
       setErrorMessage("");
+      sessionStorage.setItem("username", response.data.data.username);
       navigate("/");
       // Handle successful login (e.g. redirect to home page)
     } catch (error) {

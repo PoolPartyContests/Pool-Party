@@ -5,6 +5,7 @@ from .views import (
     LogoutView, 
     TestView, 
     GetCSRFTokenView,
+    SessionView,
 )
 
 urlpatterns = [
@@ -13,4 +14,5 @@ urlpatterns = [
     path('logout', LogoutView.as_view()),
     path('test', TestView.as_view()),
     path('get-csrf', GetCSRFTokenView.as_view()),
+    path('get-session', SessionView.as_view()),
 ]

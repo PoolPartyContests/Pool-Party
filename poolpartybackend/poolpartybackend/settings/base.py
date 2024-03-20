@@ -48,6 +48,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
 ROOT_URLCONF = "poolpartybackend.urls"
 
 TEMPLATES = [
