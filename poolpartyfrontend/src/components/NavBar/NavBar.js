@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 function NavBar() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+
   const [sessionDetails, setSessionDetails] = useState({
     isAuthenticated: false,
     username: "",
@@ -26,6 +28,7 @@ function NavBar() {
       } catch (error) {
         console.error("Failed to check login status:", error);
       }
+      setIsLoading(false);
     };
 
     checkLoginStatus();
@@ -102,20 +105,23 @@ function NavBar() {
               <Nav.Link>About Us</Nav.Link>
             </LinkContainer>{" "}
           </Nav>
-          <Nav className="custom-margin">
-            {sessionDetails.isAuthenticated ? (
-              <NavDropdown title={sessionDetails.username}>
-                <NavDropdown.Item>View Profile</NavDropdown.Item>
-                <NavDropdown.Item onClick={logoutHandler}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
-            ) : (
-              <LinkContainer to="/login">
-                <Nav.Link>Log In</Nav.Link>
-              </LinkContainer>
-            )}
-          </Nav>
+
+          {!isLoading && (
+            <Nav className="custom-margin">
+              {sessionDetails.isAuthenticated ? (
+                <NavDropdown title={sessionDetails.username}>
+                  <NavDropdown.Item>View Profile</NavDropdown.Item>
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <LinkContainer to="/login">
+                  <Nav.Link>Log In</Nav.Link>
+                </LinkContainer>
+              )}
+            </Nav>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
