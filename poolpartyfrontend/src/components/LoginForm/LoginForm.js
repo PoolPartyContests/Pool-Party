@@ -13,9 +13,6 @@ function LoginForm() {
 
   const [sessionState, setSessionState] = useState({
     csrf: "",
-    username: "",
-    password: "",
-    error: "",
     isAuthenticated: false,
   });
 
@@ -63,7 +60,11 @@ function LoginForm() {
     e.preventDefault();
     try {
       const response = await axiosInstance.post("/api/login", formData, {
-        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": sessionState.csrf,
+        },
+        credentials: "include",
       });
       setErrorMessage("");
       sessionStorage.setItem("username", response.data.data.username);
