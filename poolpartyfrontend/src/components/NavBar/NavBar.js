@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -8,16 +9,57 @@ import axiosInstance from "../../axiosConfig";
 import { useNavigate } from "react-router-dom";
 
 function NavBar() {
-  const username = sessionStorage.getItem("username");
   const navigate = useNavigate();
+  const [sessionDetails, setSessionDetails] = useState({
+    isAuthenticated: false,
+    username: "",
+  });
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const response = await axiosInstance.get("/api/get-session", {
+          withCredentials: true,
+        });
+        const data = response.data;
+        setSessionDetails(response.data);
+      } catch (error) {
+        console.error("Failed to check login status:", error);
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
+
+  const getCsrfToken = async function () {
+    try {
+      const response = await axiosInstance.get("/api/get-csrf");
+      const csrfToken = response.headers.get("X-CSRFToken");
+      return csrfToken;
+    } catch (error) {
+      console.log(error);
+    }
+    return "";
+  };
 
   const logoutHandler = async () => {
     try {
+      const csrf = await getCsrfToken();
       const response = await axiosInstance.post(
         "/api/logout",
-        { withCredentials: true } // This is important for session authentication
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrf,
+          },
+          withCredentials: true,
+        }
       );
-      sessionStorage.removeItem("username");
+      setSessionDetails({
+        isAuthenticated: false,
+        username: "",
+      });
       navigate("/");
     } catch (error) {
       console.error(error);
@@ -61,8 +103,8 @@ function NavBar() {
             </LinkContainer>{" "}
           </Nav>
           <Nav className="custom-margin">
-            {username ? (
-              <NavDropdown title={username}>
+            {sessionDetails.isAuthenticated ? (
+              <NavDropdown title={sessionDetails.username}>
                 <NavDropdown.Item>View Profile</NavDropdown.Item>
                 <NavDropdown.Item onClick={logoutHandler}>
                   Logout

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../axiosConfig";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -22,8 +21,6 @@ function LoginForm() {
     try {
       const response = await axiosInstance.get("/api/get-csrf");
       const csrfToken = response.headers.get("X-CSRFToken");
-      console.log("token:");
-      console.log(csrfToken);
       return csrfToken;
     } catch (error) {
       console.log(error);
@@ -67,7 +64,6 @@ function LoginForm() {
         credentials: "include",
       });
       setErrorMessage("");
-      sessionStorage.setItem("username", response.data.data.username);
       navigate("/");
       // Handle successful login (e.g. redirect to home page)
     } catch (error) {
