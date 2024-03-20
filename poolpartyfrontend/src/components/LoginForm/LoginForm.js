@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axiosInstance from "../../axiosConfig";
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +9,12 @@ function LoginForm() {
     username: "",
     password: "",
   });
+
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    axiosInstance.get("/api/get-csrf");
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,18 +28,24 @@ function LoginForm() {
         formData,
         { withCredentials: true } // This is important for session authentication
       );
+      setErrorMessage("");
       sessionStorage.setItem("username", response.data.data.username);
       navigate("/");
       // Handle successful login (e.g. redirect to home page)
     } catch (error) {
-      console.error(error);
-      // Handle error (e.g. display error message)
+      setErrorMessage(error.response.data.detail);
     }
   };
 
   return (
     <>
       <form onSubmit={handleSubmit} className="signup-form">
+        {errorMessage.length > 0 && (
+          <div className="alert alert-danger" role="alert">
+            {" "}
+            {errorMessage}
+          </div>
+        )}
         <input
           type="text"
           name="username"

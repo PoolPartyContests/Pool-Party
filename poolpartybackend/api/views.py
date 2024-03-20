@@ -51,3 +51,13 @@ class TestView(APIView):
     @method_decorator(ensure_csrf_cookie)
     def get(self, request):
         return Response({"detail": "Test Successful"}, status=status.HTTP_200_OK)
+
+
+class GetCSRFTokenView(APIView):
+    @method_decorator(ensure_csrf_cookie)
+    def get(self, request):
+        """
+        This view sets the CSRF token by calling ensure_csrf_cookie(),
+        and returns an empty JSON response.
+        """
+        return Response({})

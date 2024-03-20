@@ -59,7 +59,8 @@ if 'RDS_HOSTNAME' in os.environ:
             'PORT': os.environ['RDS_PORT'],
         }
     }
-
+SESSION_COOKIE_DOMAIN = '.poolpartycontests.com'
+CSRF_COOKIE_DOMAIN = '.poolpartycontests.com'
 SESSION_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE = True
