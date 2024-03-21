@@ -6,10 +6,12 @@ import SeasonalDailyHome from "./views/SeasonalDailyHome";
 import AboutUs from "./views/AboutUs";
 import SignUpPage from "./views/SignUp";
 import Login from "./views/Login";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
   return (
     <Router>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUpPage />} />
