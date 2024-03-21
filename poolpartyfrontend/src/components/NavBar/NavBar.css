@@ -18,7 +18,12 @@
     color: red;
   }
 
-  @media (min-width: 768px) {
+  /* 
+   The react-bootstrap library uses Bootstrap's CSS under the hood.
+   In Bootstrap, the navbar collapses into a dropdown menu when the viewport width is less than 992px by default.
+   This corresponds to the lg (large) breakpoint in Bootstrap. 
+  */
+  @media (min-width: 992px) {
     .nav-push-right {
       margin-left: 50%;
     }
