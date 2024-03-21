@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -7,32 +7,11 @@ import "./NavBar.css";
 import { LinkContainer } from "react-router-bootstrap";
 import axiosInstance from "../../axiosConfig";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../AuthContext";
 
 function NavBar() {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [sessionDetails, setSessionDetails] = useState({
-    isAuthenticated: false,
-    username: "",
-  });
-
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const response = await axiosInstance.get("/api/get-session", {
-          withCredentials: true,
-        });
-        const data = response.data;
-        setSessionDetails(response.data);
-      } catch (error) {
-        console.error("Failed to check login status:", error);
-      }
-      setIsLoading(false);
-    };
-
-    checkLoginStatus();
-  }, []);
+  const { loggedInDetails, setLoggedInDetails } = useContext(AuthContext);
 
   const getCsrfToken = async function () {
     try {
@@ -59,7 +38,7 @@ function NavBar() {
           withCredentials: true,
         }
       );
-      setSessionDetails({
+      setLoggedInDetails({
         isAuthenticated: false,
         username: "",
       });
@@ -105,23 +84,22 @@ function NavBar() {
               <Nav.Link>About Us</Nav.Link>
             </LinkContainer>{" "}
           </Nav>
-
-          {!isLoading && (
-            <Nav className="nav-push-right">
-              {sessionDetails.isAuthenticated ? (
-                <NavDropdown title={sessionDetails.username}>
+          <Nav className="nav-push-right">
+            {loggedInDetails.isAuthenticated ? (
+              <NavDropdown title={loggedInDetails.username}>
+                <LinkContainer to="/profile">
                   <NavDropdown.Item>View Profile</NavDropdown.Item>
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              ) : (
-                <LinkContainer to="/login">
-                  <Nav.Link>Log In</Nav.Link>
                 </LinkContainer>
-              )}
-            </Nav>
-          )}
+                <NavDropdown.Item onClick={logoutHandler}>
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : (
+              <LinkContainer to="/login">
+                <Nav.Link>Log In</Nav.Link>
+              </LinkContainer>
+            )}
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
