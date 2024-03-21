@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import axiosInstance from "../../axiosConfig";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../AuthContext";
 
 function LoginForm() {
   const navigate = useNavigate();
+  const { setLoggedInDetails } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-  });
-
-  const [sessionState, setSessionState] = useState({
-    csrf: "",
-    isAuthenticated: false,
   });
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -28,26 +25,15 @@ function LoginForm() {
     return "";
   };
 
-  useEffect(() => {
-    async function fetchSession() {
-      try {
-        const response = await axiosInstance.get("/api/get-session");
-        const data = response.data;
-        if (data.isAuthenticated) {
-          setSessionState({ ...sessionState, isAuthenticated: true });
-        } else {
-          setSessionState({
-            ...sessionState,
-            isAuthenticated: false,
-            csrf: getCsrfToken(),
-          });
-        }
-      } catch (error) {
-        console.log(error);
-      }
+  const setSession = async function () {
+    try {
+      const response = await axiosInstance.get("/api/get-session");
+      const data = response.data;
+      setLoggedInDetails(data);
+    } catch (error) {
+      console.log(error);
     }
-    fetchSession();
-  }, []);
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -59,11 +45,12 @@ function LoginForm() {
       const response = await axiosInstance.post("/api/login", formData, {
         headers: {
           "Content-Type": "application/json",
-          "X-CSRFToken": sessionState.csrf,
+          "X-CSRFToken": getCsrfToken(),
         },
         credentials: "include",
       });
       setErrorMessage("");
+      setSession();
       navigate("/");
       // Handle successful login (e.g. redirect to home page)
     } catch (error) {
