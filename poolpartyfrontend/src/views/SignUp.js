@@ -1,13 +1,11 @@
 import React, { Fragment } from "react";
 import "../styles/base.css";
-import NavBar from "../components/NavBar/NavBar";
 import SignUpForm from "../components/SignUpForm/SignUpForm";
 import { LinkContainer } from "react-router-bootstrap";
 
 function SignUp() {
   return (
     <Fragment>
-      <NavBar />
       <div className="base-page">
         <h1>Sign up to create or join any of our competitions!</h1>
         <div>

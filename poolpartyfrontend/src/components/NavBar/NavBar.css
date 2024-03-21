@@ -17,4 +17,10 @@
   .coming-soon-container {
     color: red;
   }
+
+  @media (min-width: 768px) {
+    .nav-push-right {
+      margin-left: 50%;
+    }
+  }
 }

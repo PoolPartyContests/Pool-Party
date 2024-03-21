@@ -86,7 +86,7 @@ function NavBar() {
         </LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          <Nav>
             <LinkContainer to="/">
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
@@ -107,7 +107,7 @@ function NavBar() {
           </Nav>
 
           {!isLoading && (
-            <Nav className="custom-margin">
+            <Nav className="nav-push-right">
               {sessionDetails.isAuthenticated ? (
                 <NavDropdown title={sessionDetails.username}>
                   <NavDropdown.Item>View Profile</NavDropdown.Item>
