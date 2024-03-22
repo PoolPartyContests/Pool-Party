@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axiosInstance from "../../axiosConfig";
 import "./SignUpForm.css";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../AuthContext";
 
 function SignUpForm() {
   const navigate = useNavigate();
+  const { setLoggedInDetails } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     username: "",
@@ -17,10 +19,21 @@ function SignUpForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const setSession = async function () {
+    try {
+      const response = await axiosInstance.get("/api/get-session");
+      const data = response.data;
+      setLoggedInDetails(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axiosInstance.post("/api/signup", formData);
+      setSession();
       navigate("/");
     } catch (error) {
       console.error(error);
